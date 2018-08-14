@@ -52,6 +52,10 @@ openssl req -x509 -new -nodes -key rootCA.key -subj "/CN=MY_DOMAIN" -days 5000 -
 openssl genrsa -out device.key 2048
 openssl req -new -key device.key -subj "/CN=MY_DOMAIN" -out device.csr
 openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 5000
+
+xcopy rootCA.pem ngrokroot.crt
+xcopy device.crt snakeoil.crt
+xcopy device.key snakeoil.key
 ```
 - 全部执行完毕后，会在当前路径下生成6个文件，我们服务器端会用到其中的 _snakeoil.crt_ , _snakeoil.key_ ,客户端会用到 _ngrokroot.crt_ 文件，先不管它们，留到下面使用。
 
